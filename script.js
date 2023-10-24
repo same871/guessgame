@@ -3,23 +3,7 @@
 const canvas = document.getElementById('canvas');
 const jsConfetti = new JSConfetti();
 
-const generateRandomNumber = () => {
-  return Math.trunc(Math.random() * 1000) + 1;
-};
-
-let number = generateRandomNumber();
-let score = 20;
-let highscore = 0;
-
-const displayMessage = message => {
-  document.querySelector('.message').textContent = message;
-};
-
-const displayScore = score_ => {
-  document.querySelector('.score').textContent = score_;
-};
-
-document.querySelector('.check').addEventListener('click', () => {
+const checkNumber = () => {
   const guess = Number(document.querySelector('.guess').value);
 
   if (!guess) {
@@ -49,6 +33,30 @@ document.querySelector('.check').addEventListener('click', () => {
       displayMessage('Game over');
       displayScore(0);
     }
+  }
+};
+
+const generateRandomNumber = () => {
+  return Math.trunc(Math.random() * 1000) + 1;
+};
+
+let number = generateRandomNumber();
+let score = 20;
+let highscore = 0;
+
+const displayMessage = message => {
+  document.querySelector('.message').textContent = message;
+};
+
+const displayScore = score_ => {
+  document.querySelector('.score').textContent = score_;
+};
+
+document.querySelector('.check').addEventListener('click', checkNumber);
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    checkNumber();
   }
 });
 
