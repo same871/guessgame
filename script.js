@@ -26,14 +26,28 @@ const checkNumber = () => {
   } else if (guess !== number) {
     if (score > 1) {
       guess < number
-        ? displayMessage('Guess too low!')
-        : displayMessage('Guess too high!');
+        ? displayMessage('Your Guess Is Too Low!')
+        : displayMessage('Your Is Guess Too High!');
       displayScore(--score);
     } else {
-      displayMessage('Game over');
+      document.querySelector('body').style.backgroundColor = '#7e8181';
+      document.querySelector('h1').textContent = 'Game Over';
+      displayMessage('Out Of Moves. Try Again 🤓');
       displayScore(0);
     }
   }
+};
+
+const tryAgain = () => {
+  score = 20;
+  number = generateRandomNumber();
+  displayScore(score);
+  document.querySelector('.number').textContent = '?';
+  document.querySelector('h1').textContent = 'Guess My Number!';
+  displayMessage('Start guessing...');
+  document.querySelector('.guess').value = '';
+  document.querySelector('body').style.backgroundColor = '#222';
+  document.querySelector('.number').style.width = '15rem';
 };
 
 const generateRandomNumber = () => {
@@ -60,14 +74,4 @@ document.addEventListener('keydown', e => {
   }
 });
 
-document.querySelector('.again').addEventListener('click', () => {
-  score = 20;
-  number = generateRandomNumber();
-  displayScore(score);
-  document.querySelector('.number').textContent = '?';
-  document.querySelector('h1').textContent = 'Guess My Number!';
-  displayMessage('Start guessing...');
-  document.querySelector('.guess').value = '';
-  document.querySelector('body').style.backgroundColor = '#222';
-  document.querySelector('.number').style.width = '15rem';
-});
+document.querySelector('.again').addEventListener('click', tryAgain);
