@@ -5,11 +5,12 @@ const jsConfetti = new JSConfetti();
 
 const checkNumber = () => {
   const guess = Number(document.querySelector('.guess').value);
+  document.querySelector('.guess').value = '';
 
   if (!guess) {
     displayMessage('Enter a number');
   } else if (guess === number) {
-    displayMessage('Correct number!');
+    displayMessage(`Correct Guess! Your Score is ${score}`);
     if (score > highscore) {
       highscore = score;
     }
@@ -26,8 +27,8 @@ const checkNumber = () => {
   } else if (guess !== number) {
     if (score > 1) {
       guess < number
-        ? displayMessage('Your Guess Is Too Low!')
-        : displayMessage('Your Is Guess Too High!');
+        ? displayMessage(`Oops ${guess} Is Too Low! Try Another Guess.`)
+        : displayMessage(`Oops ${guess} Is Too High! Try Another Guess.`);
       displayScore(--score);
     } else {
       document.querySelector('body').style.backgroundColor = '#7e8181';
